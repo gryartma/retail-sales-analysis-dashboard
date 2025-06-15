@@ -1,44 +1,39 @@
--- Menampilkan 10 data pertama
-SELECT TOP 10 * FROM your_table_name;
+SELECT TOP 10 *
+FROM Superstore;
 
--- Mengecek total data
-SELECT COUNT(*) AS total_data FROM your_table_name;
+SELECT COUNT(*) AS total_data FROM Superstore;
 
--- Mengecek NULL pada kolom penting
 SELECT 
-    SUM(CASE WHEN CustomerID IS NULL THEN 1 ELSE 0 END) AS null_customerid,
-    SUM(CASE WHEN OrderDate IS NULL THEN 1 ELSE 0 END) AS null_orderdate,
-    SUM(CASE WHEN Sales IS NULL THEN 1 ELSE 0 END) AS null_sales
-FROM your_table_name;
+    SUM(CASE WHEN Customer_Name IS NULL THEN 1 ELSE 0 END) AS null_customerid,
+    SUM(CASE WHEN Order_Date IS NULL THEN 1 ELSE 0 END) AS null_orderdate,
+    SUM(CASE WHEN Sales IS NULL THEN 1 ELSE 0 END) AS null_sales , 
+    SUM(CASE WHEN Profit IS NULL THEN 1 ELSE 0 END) AS null_Profit , 
+    SUM(CASE WHEN Region IS NULL THEN 1 ELSE 0 END) AS null_Region , 
+    SUM(CASE WHEN Quantity IS NULL THEN 1 ELSE 0 END) AS null_Quantity
+FROM Superstore;
 
--- Cek duplikat berdasarkan OrderID
-SELECT OrderID, COUNT(*) AS jumlah
-FROM your_table_name
-GROUP BY OrderID
+SELECT Order_ID, COUNT(*) AS jumlah
+FROM Superstore
+GROUP BY Order_ID
 HAVING COUNT(*) > 1;
 
--- Cek jumlah data unik
 SELECT 
-    COUNT(DISTINCT CustomerID) AS unique_customers,
-    COUNT(DISTINCT ProductID) AS unique_products,
-    COUNT(DISTINCT OrderID) AS unique_orders
-FROM your_table_name;
+    COUNT(DISTINCT Customer_Name) AS unique_customers,
+    COUNT(DISTINCT Product_ID) AS unique_products,
+    COUNT(DISTINCT Order_ID) AS unique_orders
+FROM Superstore;
 
--- Deteksi data anomali negatif
-SELECT * FROM your_table_name
+SELECT * 
+FROM Superstore
 WHERE Sales < 0 OR Profit < 0;
 
--- Nilai unik kolom kategorikal
-SELECT DISTINCT Segment FROM your_table_name;
-SELECT DISTINCT ShipMode FROM your_table_name;
-SELECT DISTINCT Category FROM your_table_name;
+SELECT DISTINCT Segment FROM Superstore;
+SELECT DISTINCT Ship_Mode FROM Superstore;
+SELECT DISTINCT Category FROM Superstore;
 
--- Menambahkan nama bulan dan tahun dari OrderDate
 SELECT 
     *,
-    DATENAME(MONTH, OrderDate) AS nama_bulan,
-    YEAR(OrderDate) AS tahun
-FROM your_table_name;
-
-Menambahkan query eksplorasi awal SQL
+    DATENAME(MONTH, Order_Date) AS nama_bulan,
+    YEAR(Order_Date) AS tahun
+FROM Superstore;
 
